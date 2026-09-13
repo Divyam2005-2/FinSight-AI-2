@@ -1,0 +1,64 @@
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="auth-card">
+
+    <p class="eyebrow">
+        START TODAY
+    </p>
+
+    <h1>
+        Create your account
+    </h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            <label>
+
+                {{ field.label }}
+
+                {{ field }}
+
+                {% if field.help_text %}
+
+                    <small>
+                        {{ field.help_text|safe }}
+                    </small>
+
+                {% endif %}
+
+                {% for error in field.errors %}
+
+                    <small class="error">
+                        {{ error }}
+                    </small>
+
+                {% endfor %}
+
+            </label>
+
+        {% endfor %}
+
+        <button class="button" type="submit">
+            Create account
+        </button>
+
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="{% url 'login' %}">
+            Log in
+        </a>.
+    </p>
+
+</section>
+
+{% endblock %}
+```

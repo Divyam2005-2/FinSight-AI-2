@@ -1,0 +1,50 @@
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="auth-card">
+
+    <p class="eyebrow">
+        CONFIRM ACTION
+    </p>
+
+    <h1>
+        Delete transaction?
+    </h1>
+
+    <p>
+        This will permanently remove the
+        {{ transaction.category }}
+        transaction for
+        ₹{{ transaction.amount|floatformat:2 }}.
+    </p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <div class="actions">
+
+            <button
+                class="button danger-button"
+                type="submit"
+            >
+                Yes, delete
+            </button>
+
+            <a
+                class="button outline"
+                href="{% url 'transactions' %}"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
+```

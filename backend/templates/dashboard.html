@@ -1,0 +1,186 @@
+```html
+{% extends 'base.html' %}
+
+{% block title %}
+    Dashboard | FinSight AI
+{% endblock %}
+
+{% block content %}
+
+<div class="page-head">
+
+    <div>
+        <p class="eyebrow">
+            YOUR OVERVIEW
+        </p>
+
+        <h1>
+            Financial dashboard
+        </h1>
+    </div>
+
+    <a class="button" href="{% url 'add_transaction' %}">
+        + Add transaction
+    </a>
+
+</div>
+
+
+<section class="stats">
+
+    <article>
+        <span>Total income</span>
+
+        <strong class="income">
+            ₹{{ total_income|floatformat:2 }}
+        </strong>
+    </article>
+
+
+    <article>
+        <span>Total expenses</span>
+
+        <strong class="expense">
+            ₹{{ total_expenses|floatformat:2 }}
+        </strong>
+    </article>
+
+
+    <article>
+        <span>Current balance</span>
+
+        <strong>
+            ₹{{ balance|floatformat:2 }}
+        </strong>
+    </article>
+
+
+    <article>
+        <span>Transactions</span>
+
+        <strong>
+            {{ transaction_count }}
+        </strong>
+    </article>
+
+</section>
+
+
+<section class="grid">
+
+    <!-- Recent Transactions -->
+    <article class="panel">
+
+        <h2>
+            Recent transactions
+        </h2>
+
+        {% for item in recent_transactions %}
+
+            <div class="row">
+
+                <div>
+
+                    <b>
+                        {{ item.category }}
+                    </b>
+
+                    <small>
+                        {{ item.date }}
+                        ·
+                        {{ item.description|default:'No description' }}
+                    </small>
+
+                </div>
+
+
+                <strong class="{{ item.transaction_type }}">
+
+                    {% if item.transaction_type == 'income' %}
+                        +
+                    {% else %}
+                        -
+                    {% endif %}
+
+                    ₹{{ item.amount|floatformat:2 }}
+
+                </strong>
+
+            </div>
+
+        {% empty %}
+
+            <p>
+                No transactions yet.
+                Add your first one to get started.
+            </p>
+
+        {% endfor %}
+
+    </article>
+
+
+    <!-- Spending by Category -->
+    <article class="panel">
+
+        <h2>
+            Spending by category
+        </h2>
+
+        {% for item in category_data %}
+
+            <div class="bar-label">
+
+                <span>
+                    {{ item.category }}
+                </span>
+
+                <b>
+                    ₹{{ item.total|floatformat:2 }}
+                </b>
+
+            </div>
+
+
+            <div class="bar">
+
+                <i style="width: {{ item.width }}%"></i>
+
+            </div>
+
+        {% empty %}
+
+            <p>
+                No expense data yet.
+            </p>
+
+        {% endfor %}
+
+    </article>
+
+</section>
+
+
+<!-- AI Financial Insights -->
+<section class="panel insights">
+
+    <h2>
+        ✦ AI financial insights
+    </h2>
+
+    {% for insight in insights %}
+
+        <p>
+            {{ insight }}
+        </p>
+
+    {% endfor %}
+
+    <a href="{% url 'ai_assistant' %}">
+        Ask the assistant →
+    </a>
+
+</section>
+
+{% endblock %}
+```

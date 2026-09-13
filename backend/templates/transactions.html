@@ -1,0 +1,194 @@
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-head">
+
+    <div>
+
+        <p class="eyebrow">
+            YOUR RECORDS
+        </p>
+
+        <h1>
+            Transactions
+        </h1>
+
+    </div>
+
+    <a class="button" href="{% url 'add_transaction' %}">
+        + Add transaction
+    </a>
+
+</div>
+
+
+<form class="filters" method="get">
+
+    <select name="type">
+
+        <option value="">
+            All types
+        </option>
+
+        <option
+            value="income"
+            {% if selected_type == 'income' %}
+                selected
+            {% endif %}
+        >
+            Income
+        </option>
+
+        <option
+            value="expense"
+            {% if selected_type == 'expense' %}
+                selected
+            {% endif %}
+        >
+            Expense
+        </option>
+
+    </select>
+
+
+    <select name="category">
+
+        <option value="">
+            All categories
+        </option>
+
+        {% for value, label in categories %}
+
+            <option
+                value="{{ value }}"
+                {% if selected_category == value %}
+                    selected
+                {% endif %}
+            >
+                {{ label }}
+            </option>
+
+        {% endfor %}
+
+    </select>
+
+
+    <button class="button small" type="submit">
+        Filter
+    </button>
+
+    <a href="{% url 'transactions' %}">
+        Clear
+    </a>
+
+</form>
+
+
+<div class="table-wrap">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Date
+                </th>
+
+                <th>
+                    Type
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Amount
+                </th>
+
+                <th>
+                    Actions
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for item in transactions %}
+
+                <tr>
+
+                    <td>
+                        {{ item.date }}
+                    </td>
+
+                    <td>
+
+                        <span class="pill {{ item.transaction_type }}">
+                            {{ item.get_transaction_type_display }}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        {{ item.category }}
+                    </td>
+
+                    <td>
+                        {{ item.description|default:'—' }}
+                    </td>
+
+                    <td class="{{ item.transaction_type }}">
+                        ₹{{ item.amount|floatformat:2 }}
+                    </td>
+
+                    <td>
+
+                        <a href="{% url 'edit_transaction' item.pk %}">
+                            Edit
+                        </a>
+
+                        ·
+
+                        <a
+                            class="danger"
+                            href="{% url 'delete_transaction' item.pk %}"
+                        >
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="6">
+                        No transactions match this filter.
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
+```

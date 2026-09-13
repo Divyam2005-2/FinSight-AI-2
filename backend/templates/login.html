@@ -1,0 +1,56 @@
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="auth-card">
+
+    <p class="eyebrow">
+        WELCOME BACK
+    </p>
+
+    <h1>
+        Log in to FinSight AI
+    </h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            <label>
+
+                {{ field.label }}
+
+                {{ field }}
+
+                {% for error in field.errors %}
+
+                    <small class="error">
+                        {{ error }}
+                    </small>
+
+                {% endfor %}
+
+            </label>
+
+        {% endfor %}
+
+        <button class="button" type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <p>
+        New here?
+        <a href="{% url 'register' %}">
+            Create an account
+        </a>.
+    </p>
+
+</section>
+
+{% endblock %}
+```

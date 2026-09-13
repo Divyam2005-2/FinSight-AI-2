@@ -1,0 +1,141 @@
+```html
+{% extends 'base.html' %}
+
+{% block title %}
+    FinSight AI | Personal Finance
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            PERSONAL FINANCE, SIMPLIFIED
+        </p>
+
+        <h1>
+            Take control of your money with
+            <em>FinSight AI.</em>
+        </h1>
+
+        <p>
+            Track income and expenses, understand your habits,
+            and make confident financial decisions—one transaction
+            at a time.
+        </p>
+
+        <div class="actions">
+
+            <a class="button" href="{% url 'register' %}">
+                Get Started
+            </a>
+
+            <a class="button outline" href="{% url 'login' %}">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <span>
+            Current balance
+        </span>
+
+        <strong>
+            ₹ 48,750
+        </strong>
+
+        <div class="mini-bars">
+
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+
+        </div>
+
+        <small>
+            See your financial picture at a glance.
+        </small>
+
+    </div>
+
+</section>
+
+
+<section class="features">
+
+    <article>
+
+        <b>01</b>
+
+        <h2>
+            Expense Tracking
+        </h2>
+
+        <p>
+            Record every income and expense
+            in a few simple clicks.
+        </p>
+
+    </article>
+
+
+    <article>
+
+        <b>02</b>
+
+        <h2>
+            Financial Dashboard
+        </h2>
+
+        <p>
+            Know your income, spending, balance,
+            and recent activity.
+        </p>
+
+    </article>
+
+
+    <article>
+
+        <b>03</b>
+
+        <h2>
+            Spending Insights
+        </h2>
+
+        <p>
+            Find your biggest expense categories
+            with clear summaries.
+        </p>
+
+    </article>
+
+
+    <article>
+
+        <b>04</b>
+
+        <h2>
+            AI Assistant
+        </h2>
+
+        <p>
+            Ask natural questions about
+            your own finance data.
+        </p>
+
+    </article>
+
+</section>
+
+{% endblock %}
+```

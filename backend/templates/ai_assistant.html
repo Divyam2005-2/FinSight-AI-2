@@ -1,0 +1,66 @@
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="assistant">
+
+    <p class="eyebrow">
+        RULE-BASED, PRIVATE, USEFUL
+    </p>
+
+    <h1>FinSight AI Assistant</h1>
+
+    <p>
+        Ask about your recorded spending, income, balance,
+        or highest expense category.
+    </p>
+
+    <div class="examples">
+        Try:
+        “How much did I spend this month?” ·
+        “What is my balance?” ·
+        “How much did I spend on food?”
+    </div>
+
+    <form method="post" class="ask-form">
+
+        {% csrf_token %}
+
+        <input
+            name="question"
+            value="{{ question }}"
+            placeholder="Ask me about your finances..."
+            required
+        >
+
+        <button class="button" type="submit">
+            Ask FinSight
+        </button>
+
+    </form>
+
+    {% if answer %}
+
+        <article class="answer">
+
+            <span>You asked</span>
+
+            <p>
+                {{ question }}
+            </p>
+
+            <span>FinSight says</span>
+
+            <h2>
+                {{ answer }}
+            </h2>
+
+        </article>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
+```

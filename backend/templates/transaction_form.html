@@ -1,0 +1,60 @@
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="auth-card form-wide">
+
+    <p class="eyebrow">
+        TRANSACTION
+    </p>
+
+    <h1>
+        {{ title }}
+    </h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            <label>
+
+                {{ field.label }}
+
+                {{ field }}
+
+                {% for error in field.errors %}
+
+                    <small class="error">
+                        {{ error }}
+                    </small>
+
+                {% endfor %}
+
+            </label>
+
+        {% endfor %}
+
+        <div class="actions">
+
+            <button class="button" type="submit">
+                Save transaction
+            </button>
+
+            <a
+                class="button outline"
+                href="{% url 'transactions' %}"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
+```
